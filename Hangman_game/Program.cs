@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Hangman_game
 {
@@ -7,18 +8,38 @@ namespace Hangman_game
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Hangman game!");
-            string[] list = System.IO.File.ReadAllLines(@"C:\Users\buats\OneDrive\Pulpit\Motorola Academy\countries_and_capitals.txt");
+            string[] list = File.ReadAllLines(@"C:\Users\buats\OneDrive\Pulpit\Motorola Academy\countries_and_capitals.txt");
 
-            int X = list.GetLength(0);
-          
-            Console.WriteLine($"Length: {X}");
-            string[] row = list[1].Split('|');
+            int length = list.Length;
+            Console.WriteLine($"List's length: {length}");
+            String[] splitter = { " | " };
+            int splitter_count = 3;
 
-            foreach (var word in row)
+            Random random = new Random();
+            int row_num = random.Next(length);
+
+            string[] row = list[row_num].Split(splitter, splitter_count, StringSplitOptions.None);
+
+            Console.WriteLine($"Row number: {row_num}");
+            Console.WriteLine($"Country: {row[0]}");
+            Console.WriteLine($"Capital: {row[1]}");       
+            Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
+
+            Select: char input = Console.ReadKey().KeyChar;
+            Console.WriteLine();
+
+        switch (input)
             {
-                System.Console.WriteLine($"{word}");
+                case 'l': case 'L':
+                    Console.WriteLine($"You selected letter");
+                    break;
+                case 'w': case'W':
+                    Console.WriteLine($"You selected word(s)");
+                    break;
+                default:
+                    Console.WriteLine("Wrong input, try again");
+                    goto Select;
             }
-
 
         }
     }
