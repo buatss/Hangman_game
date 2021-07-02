@@ -4,8 +4,8 @@ namespace Hangman_game
 {
     public class Hangman
     {
-        private int _hp = 5;
-        public string Capital { get; private set; }
+        private int _hp = 5; 
+        public string Capitol { get; private set; }
         public string Country { get; private set; }
 
         public void SubstractHP(int amount)
@@ -23,19 +23,19 @@ namespace Hangman_game
 
         public void SetAttributes(string capitol, string country)
         {
-            this.Capital = capitol;
+            this.Capitol = capitol;
             this.Country = country;
         }
 
         public void Check(string word)
         {
-            if (word.Equals(Capital))
+            if (word.Equals(Capitol))
             {
-                Console.WriteLine($"Congratulations! {Capital} is capital of {Country}");
+                Console.WriteLine($"Congratulations! {Capitol} is capitol of {Country}");
             }
-            else if (Capital.Contains(word))
+            else if (Capitol.Contains(word))
             {
-                Console.WriteLine($"Capital contains this letter");
+                Console.WriteLine($"Capitol contains this letter");
             }
             else if (word.Length > 1)
             {

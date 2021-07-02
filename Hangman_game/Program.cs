@@ -8,7 +8,7 @@ namespace Hangman_game
     {
         static void Main(string[] args)
         {
-            
+
             Console.WriteLine("Welcome to Hangman game!");
             string[] list = File.ReadAllLines(@"C:\Users\buats\OneDrive\Pulpit\Motorola Academy\countries_and_capitals.txt");
 
@@ -28,7 +28,7 @@ namespace Hangman_game
             Console.WriteLine($"Capital: {row[1]}");
             Regex rgx = new Regex("[^ ]");
             string dashes = row[1];
-            dashes = rgx.Replace(dashes,"_");
+            dashes = rgx.Replace(dashes, "_");
 
 
             Console.WriteLine($"Guess a capital\n{dashes}");
@@ -37,9 +37,9 @@ namespace Hangman_game
 
             Hangman Bob = new Hangman();
             Bob.SetAttributes(row[1], row[0]);
-            while (Bob.ReadHP()>0)
+            while (Bob.ReadHP() > 0)
             {
-            char select_input = Console.ReadKey().KeyChar;
+                char select_input = Console.ReadKey().KeyChar;
                 Console.WriteLine();
 
                 switch (select_input)
@@ -62,7 +62,7 @@ namespace Hangman_game
                         break;
                 }
             }
-            
+
         }
     }
 }
