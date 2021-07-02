@@ -25,15 +25,23 @@ namespace Hangman_game
             Capital = Cp;
             Country = Cn;
         }
-       public void check_word(string word)
+       public void check(string word)
         {
             if (word.Contains(Capital))
             {
                 Console.WriteLine($"Congratulations! {Capital} is capital of {Country}");
             }
-            else
+            else if(Capital.Contains(word))
+                {
+                Console.WriteLine($"Capital contains this letter");
+            }
+            else if (word.Length>1)
             {
                 Substract_HP(2);
+            }
+            else if(word.Length==1)
+            {
+                Substract_HP(1);
             }
         }
     }
@@ -78,12 +86,14 @@ namespace Hangman_game
             {
                 case 'l': case 'L':
                     Console.WriteLine($"You selected letter");
+                    char letter_input = Console.ReadKey().KeyChar;
+                    string letter_input2 = letter_input.ToString();
+                    Bob.check(letter_input2);
                     break;
                 case 'w': case'W':
                     Console.WriteLine($"You selected word(s)");
                     string input = Console.ReadLine();
-
-                    Bob.check_word(input);
+                    Bob.check(input);
                     break;
                 default:
                     Console.WriteLine("Wrong input, try again");
