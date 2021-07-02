@@ -21,9 +21,9 @@ namespace Hangman_game
             }
         }
 
-        public void SetAttributes(string capitol, string country)
+        public void SetAttributes(string capital, string country)
         {
-            this.Capital = capitol;
+            this.Capital = capital;
             this.Country = country;
         }
 
