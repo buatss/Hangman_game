@@ -36,27 +36,31 @@ namespace Hangman_game
             Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
 
             Hangman Bob = new Hangman();
-            Bob.get_attributes(row[1], row[0]);
-
-        Select: char select_input = Console.ReadKey().KeyChar;
-            Console.WriteLine();
-
-        switch (select_input)
+            Bob.SetAttributes(row[1], row[0]);
+            while (Bob.ReadHP()>0)
             {
-                case 'l': case 'L':
-                    Console.WriteLine($"You selected letter");
-                    char letter_input = Console.ReadKey().KeyChar;
-                    string letter_input2 = letter_input.ToString();
-                    Bob.check(letter_input2);
-                    break;
-                case 'w': case'W':
-                    Console.WriteLine($"You selected word(s)");
-                    string input = Console.ReadLine();
-                    Bob.check(input);
-                    break;
-                default:
-                    Console.WriteLine("Wrong input, try again");
-                    goto Select;
+            char select_input = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+
+                switch (select_input)
+                {
+                    case 'l':
+                    case 'L':
+                        Console.WriteLine($"You selected letter");
+                        char letter_input = Console.ReadKey().KeyChar;
+                        string letter_input2 = letter_input.ToString();
+                        Bob.Check(letter_input2);
+                        break;
+                    case 'w':
+                    case 'W':
+                        Console.WriteLine($"You selected word(s)");
+                        string input = Console.ReadLine();
+                        Bob.Check(input);
+                        break;
+                    default:
+                        Console.WriteLine("Wrong input, try again");
+                        break;
+                }
             }
             
         }

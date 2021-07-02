@@ -4,13 +4,14 @@ namespace Hangman_game
 {
     public class Hangman
     {
-        int HP = 5;
-        string Capital;
-        string Country;
-        void Substract_HP(int amount)
+        private int _hp = 5;
+        public string Capital { get; private set; }
+        public string Country { get; private set; }
+
+        public void SubstractHP(int amount)
         {
-            HP = HP - amount;
-            if (HP > 0)
+            _hp = _hp - amount;
+            if (_hp > 0)
             {
                 Console.WriteLine($"You lost {amount} health point(s)");
             }
@@ -19,29 +20,37 @@ namespace Hangman_game
                 Console.WriteLine($"You lost");
             }
         }
-        public void get_attributes(string Cp,string Cn)
+
+        public void SetAttributes(string capitol, string country)
         {
-            Capital = Cp;
-            Country = Cn;
+            this.Capital = capitol;
+            this.Country = country;
         }
-       public void check(string word)
+
+        public void Check(string word)
         {
             if (word.Equals(Capital))
             {
                 Console.WriteLine($"Congratulations! {Capital} is capital of {Country}");
             }
-            else if(Capital.Contains(word))
-                {
+            else if (Capital.Contains(word))
+            {
                 Console.WriteLine($"Capital contains this letter");
             }
-            else if (word.Length>1)
+            else if (word.Length > 1)
             {
-                Substract_HP(2);
+                this.SubstractHP(2);
             }
-            else if(word.Length==1)
+            else if (word.Length == 1)
             {
-                Substract_HP(1);
+                this.SubstractHP(1);
             }
         }
+        public int ReadHP()
+        {
+            return this._hp;
+        }
     }
+
+
 }
