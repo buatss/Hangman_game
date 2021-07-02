@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Hangman_game
 {
@@ -67,7 +68,10 @@ namespace Hangman_game
             Console.WriteLine($"Row number: {row_num}");
             Console.WriteLine($"Country: {row[0]}");
             Console.WriteLine($"Capital: {row[1]}");
-            string dashes = row[1].Replace(" ","_");
+            Regex rgx = new Regex("[^ ]");
+            string dashes = row[1];
+            dashes = rgx.Replace(dashes,"_");
+
 
             Console.WriteLine($"Guess a capital\n{dashes}");
 
