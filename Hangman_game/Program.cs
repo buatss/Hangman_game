@@ -3,10 +3,45 @@ using System.IO;
 
 namespace Hangman_game
 {
+    public class Hangman
+    {
+        int HP = 5;
+        string Capital;
+        string Country;
+        void Substract_HP(int amount)
+        {
+            HP = HP - amount;
+            if (HP > 0)
+            {
+                Console.WriteLine($"You lost {amount} health point(s)");
+            }
+            else
+            {
+                Console.WriteLine($"You lost");
+            }
+        }
+        public void get_attributes(string Cp,string Cn)
+        {
+            Capital = Cp;
+            Country = Cn;
+        }
+       public void check_word(string word)
+        {
+            if (word.Contains(Capital))
+            {
+                Console.WriteLine($"Congratulations! {Capital} is capital of {Country}");
+            }
+            else
+            {
+                Substract_HP(2);
+            }
+        }
+    }
     class Program
     {
         static void Main(string[] args)
         {
+            
             Console.WriteLine("Welcome to Hangman game!");
             string[] list = File.ReadAllLines(@"C:\Users\buats\OneDrive\Pulpit\Motorola Academy\countries_and_capitals.txt");
 
@@ -33,16 +68,22 @@ namespace Hangman_game
 
             Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
 
-            Select: char input = Console.ReadKey().KeyChar;
+            Hangman Bob = new Hangman();
+            Bob.get_attributes(row[1], row[0]);
+
+        Select: char select_input = Console.ReadKey().KeyChar;
             Console.WriteLine();
 
-        switch (input)
+        switch (select_input)
             {
                 case 'l': case 'L':
                     Console.WriteLine($"You selected letter");
                     break;
                 case 'w': case'W':
                     Console.WriteLine($"You selected word(s)");
+                    string input = Console.ReadLine();
+
+                    Bob.check_word(input);
                     break;
                 default:
                     Console.WriteLine("Wrong input, try again");
