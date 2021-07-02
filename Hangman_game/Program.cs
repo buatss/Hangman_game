@@ -27,7 +27,7 @@ namespace Hangman_game
         }
        public void check(string word)
         {
-            if (word.Contains(Capital))
+            if (word.Equals(Capital))
             {
                 Console.WriteLine($"Congratulations! {Capital} is capital of {Country}");
             }
@@ -70,7 +70,7 @@ namespace Hangman_game
             string dashes ="";
             for (int i=0; i<row[1].Length; i++)
             {
-                dashes = dashes + " _";
+                dashes = dashes + "_";
             }
             Console.WriteLine($"Guess a capital\n{dashes}");
 
