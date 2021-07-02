@@ -18,11 +18,19 @@ namespace Hangman_game
             Random random = new Random();
             int row_num = random.Next(length);
 
+
             string[] row = list[row_num].Split(splitter, splitter_count, StringSplitOptions.None);
 
             Console.WriteLine($"Row number: {row_num}");
             Console.WriteLine($"Country: {row[0]}");
-            Console.WriteLine($"Capital: {row[1]}");       
+            Console.WriteLine($"Capital: {row[1]}");
+            string dashes ="";
+            for (int i=0; i<row[1].Length; i++)
+            {
+                dashes = dashes + " _";
+            }
+            Console.WriteLine($"Guess a capital\n{dashes}");
+
             Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
 
             Select: char input = Console.ReadKey().KeyChar;
@@ -40,7 +48,7 @@ namespace Hangman_game
                     Console.WriteLine("Wrong input, try again");
                     goto Select;
             }
-
+            
         }
     }
 }
