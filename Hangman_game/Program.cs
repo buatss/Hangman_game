@@ -31,7 +31,11 @@ namespace Hangman_game
 
         static void Main(string[] args)
             {
-            Console.WriteLine("Welcome to Hangman game!");
+            char RS;
+            do
+                {
+                Console.Clear();
+                Console.WriteLine("Welcome to Hangman game!");
             string[] list = File.ReadAllLines(@"C:\Users\buats\OneDrive\Pulpit\Motorola Academy\countries_and_capitals.txt");
             int length = list.Length;
             Console.WriteLine($"List's length: {length}");
@@ -50,33 +54,35 @@ namespace Hangman_game
             Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
             Hangman Bob = new Hangman();
             Bob.SetAttributes(row[1], row[0]);
-            while (Bob.ReadHP() > 0 & Bob.Win == false)
-                {
-                char select_input = Console.ReadKey().KeyChar;
-                Console.WriteLine();
-                switch (select_input)
+                while (Bob.ReadHP() > 0 & Bob.Win == false)
                     {
-                    case 'l':
-                    case 'L':
-                        Console.WriteLine($"You selected letter");
-                        char letter_input = Console.ReadKey().KeyChar;
-                        string letter_input2 = letter_input.ToString();
-                        Bob.Check(letter_input2);
-                        dashes = FillDashes(letter_input, Bob.Capital, dashes);
-                        Bob.Check(dashes);
-                        break;
-                    case 'w':
-                    case 'W':
-                        Console.WriteLine($"You selected word(s)");
-                        string input = Console.ReadLine();
-                        Bob.Check(input);
-                        break;
-                    default:
-                        Console.WriteLine("Wrong input, try again. Perhaps you pressed the wrong button or again you guessed wrong letter.");
-                        break;
+                    char select_input = Console.ReadKey().KeyChar;
+                    Console.WriteLine();
+                    switch (select_input)
+                        {
+                        case 'l':
+                        case 'L':
+                            Console.WriteLine($"You selected letter");
+                            char letter_input = Console.ReadKey().KeyChar;
+                            string letter_input2 = letter_input.ToString();
+                            Bob.Check(letter_input2);
+                            dashes = FillDashes(letter_input, Bob.Capital, dashes);
+                            Bob.Check(dashes);
+                            break;
+                        case 'w':
+                        case 'W':
+                            Console.WriteLine($"You selected word(s)");
+                            string input = Console.ReadLine();
+                            Bob.Check(input);
+                            break;
+                        default:
+                            Console.WriteLine("Wrong input, try again. Perhaps you pressed the wrong button or again you guessed wrong letter.");
+                            break;
+                        }
                     }
-                }
-
+                Console.WriteLine("Do you want to try again? Press Y if you want so, if not press any key.");
+                RS = Console.ReadKey().KeyChar;
+                } while (RS == 'Y' | RS == 'y');
             }
         }
     }
