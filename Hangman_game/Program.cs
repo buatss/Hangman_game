@@ -12,23 +12,16 @@ namespace Hangman_game
 
         public static string Fill_Dashes(char letter, string capital,string Current_Dashes)
         {
-            //int count = capital.Count(f => (f==letter));
-            //Console.WriteLine($"Count: {count}");
 
             var foundIndexes = new List<int>();
+
             for (int i=0; i<capital.Length;i++)
             {
                 if (capital[i] == letter)
                     foundIndexes.Add(i);
             }
-            foreach(int index in foundIndexes)
-            {
-                /*
-                Console.WriteLine($"Index: {index}");
-                Console.WriteLine($"List's count: {foundIndexes.Count}");
-                */
 
-                var aStringBuilder = new StringBuilder(Current_Dashes);
+        var aStringBuilder = new StringBuilder(Current_Dashes);
                 for (int i=0;i<foundIndexes.Count;i++)
                 {
                     
@@ -36,9 +29,7 @@ namespace Hangman_game
                     aStringBuilder.Insert(foundIndexes[i], letter.ToString());
                     Current_Dashes = aStringBuilder.ToString();
                 }
-                
-              
-            }
+
             Console.WriteLine($"Filled dashes: {Current_Dashes}");
             return Current_Dashes;
         }
@@ -55,8 +46,6 @@ namespace Hangman_game
 
             Random random = new Random();
             int row_num = random.Next(length);
-
-            row_num = 55;
 
 
            string[] row = list[row_num].Split(splitter, splitter_count, StringSplitOptions.None);
