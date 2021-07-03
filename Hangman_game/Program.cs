@@ -1,11 +1,47 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Hangman_game
 {
+
     class Program
     {
+
+        public static string Fill_Dashes(char letter, string capital,string Current_Dashes)
+        {
+            //int count = capital.Count(f => (f==letter));
+            //Console.WriteLine($"Count: {count}");
+
+            var foundIndexes = new List<int>();
+            for (int i=0; i<capital.Length;i++)
+            {
+                if (capital[i] == letter)
+                    foundIndexes.Add(i);
+            }
+            foreach(int index in foundIndexes)
+            {
+                /*
+                Console.WriteLine($"Index: {index}");
+                Console.WriteLine($"List's count: {foundIndexes.Count}");
+                */
+
+                var aStringBuilder = new StringBuilder(Current_Dashes);
+                for (int i=0;i<foundIndexes.Count;i++)
+                {
+                    
+                    aStringBuilder.Remove(foundIndexes[i], 1);
+                    aStringBuilder.Insert(foundIndexes[i], letter.ToString());
+                    Current_Dashes = aStringBuilder.ToString();
+                }
+                
+              
+            }
+            Console.WriteLine($"Filled dashes: {Current_Dashes}");
+            return Current_Dashes;
+        }
         static void Main(string[] args)
         {
             
@@ -20,8 +56,10 @@ namespace Hangman_game
             Random random = new Random();
             int row_num = random.Next(length);
 
+            row_num = 55;
 
-            string[] row = list[row_num].Split(splitter, splitter_count, StringSplitOptions.None);
+
+           string[] row = list[row_num].Split(splitter, splitter_count, StringSplitOptions.None);
 
             Console.WriteLine($"Row number: {row_num}");
             Console.WriteLine($"Country: {row[0]}");
@@ -29,6 +67,7 @@ namespace Hangman_game
             Regex rgx = new Regex("[^ ]");
             string dashes = row[1];
             dashes = rgx.Replace(dashes,"_");
+
 
 
             Console.WriteLine($"Guess a capital\n{dashes}");
@@ -50,6 +89,7 @@ namespace Hangman_game
                         char letter_input = Console.ReadKey().KeyChar;
                         string letter_input2 = letter_input.ToString();
                         Bob.Check(letter_input2);
+                        dashes=Fill_Dashes(letter_input,Bob.Capital,dashes);
                         break;
                     case 'w':
                     case 'W':
