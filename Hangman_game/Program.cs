@@ -65,7 +65,7 @@ namespace Hangman_game
 
             Hangman Bob = new Hangman();
             Bob.SetAttributes(row[1], row[0]);
-            while (Bob.ReadHP()>0)
+            while (Bob.ReadHP()>0 & Bob.Win==false)
             {
             char select_input = Console.ReadKey().KeyChar;
                 Console.WriteLine();
@@ -79,6 +79,7 @@ namespace Hangman_game
                         string letter_input2 = letter_input.ToString();
                         Bob.Check(letter_input2);
                         dashes=Fill_Dashes(letter_input,Bob.Capital,dashes);
+                        Bob.Check(dashes);
                         break;
                     case 'w':
                     case 'W':

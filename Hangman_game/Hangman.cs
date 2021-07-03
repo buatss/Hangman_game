@@ -5,6 +5,7 @@ namespace Hangman_game
     public class Hangman
     {
         private int _hp = 5;
+        public bool Win { get; private set; } = false;
         public string Capital { get; private set; }
         public string Country { get; private set; }
 
@@ -32,16 +33,17 @@ namespace Hangman_game
             if (word.Equals(Capital))
             {
                 Console.WriteLine($"Congratulations! {Capital} is capital of {Country}");
+                this.Win = true;
             }
             else if (Capital.Contains(word))
             {
                 Console.WriteLine($"Capital contains this letter");
             }
-            else if (word.Length > 1)
+            else if (word.Length > 1 & word.Contains("_")==false)
             {
                 this.SubstractHP(2);
             }
-            else if (word.Length == 1)
+            else if (word.Length == 1 & word.Contains("_")==false)
             {
                 this.SubstractHP(1);
             }
