@@ -6,8 +6,29 @@ using System.Text;
 
 namespace Hangman_game
     {
-    class Program : ProgramBase
+    class Program
         {
+        public static string FillDashes(char letter, string capital, string Current_Dashes)
+            {
+            var foundIndexes = new List<int>();
+            for (int i = 0; i < capital.Length; i++)
+                {
+                if (capital[i] == letter)
+                    {
+                    foundIndexes.Add(i);
+                    }
+                }
+            var aStringBuilder = new StringBuilder(Current_Dashes);
+            for (int i = 0; i < foundIndexes.Count; i++)
+                {
+                aStringBuilder.Remove(foundIndexes[i], 1);
+                aStringBuilder.Insert(foundIndexes[i], letter.ToString());
+                Current_Dashes = aStringBuilder.ToString();
+                }
+            Console.WriteLine($"Filled dashes: {Current_Dashes}");
+            return Current_Dashes;
+            }
+
         static void Main(string[] args)
             {
             Console.WriteLine("Welcome to Hangman game!");
@@ -51,7 +72,7 @@ namespace Hangman_game
                         Bob.Check(input);
                         break;
                     default:
-                        Console.WriteLine("Wrong input, try again");
+                        Console.WriteLine("Wrong input, try again. Perhaps you pressed the wrong button or again you guessed wrong letter.");
                         break;
                     }
                 }

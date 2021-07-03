@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Hangman_game
     {
     public class Hangman
         {
         private int _hp = 5;
-        public bool? Win { get; private set; } 
+        public bool Win { get; private set; }
+        public List<string> NotInWordList = new List<string>();
         public string Capital { get; private set; }
         public string Country { get; private set; }
 
@@ -37,7 +39,10 @@ namespace Hangman_game
                 }
             else if (Capital.Contains(word))
                 {
-                Console.WriteLine($"Capital contains this letter");
+                if (CheckNotInWord(word) == false)
+                    {
+                    Console.WriteLine($"Capital contains this letter");
+                    }
                 }
             else if (word.Length > 1 & word.Contains("_") == false)
                 {
@@ -45,13 +50,32 @@ namespace Hangman_game
                 }
             else if (word.Length == 1 & word.Contains("_") == false)
                 {
-                this.SubstractHP(1);
+                if (CheckNotInWord(word) == false)
+                    {
+                    this.SubstractHP(1);
+                    }
                 }
             }
+        public void NotInWord()
+            {
 
+            }
         public int ReadHP()
             {
             return this._hp;
+            }
+
+        public bool CheckNotInWord(string letter) //if this method returns true player should have another try to guess without loosing HP
+            {
+            if (this.NotInWordList.Contains(letter))
+                {
+                return true;
+                }
+            else
+                {
+                return false;
+                this.NotInWordList.Add(letter);
+                }
             }
         }
     }
