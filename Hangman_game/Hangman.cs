@@ -56,10 +56,7 @@ namespace Hangman_game
                     }
                 }
             }
-        public void NotInWord()
-            {
 
-            }
         public int ReadHP()
             {
             return this._hp;
@@ -73,8 +70,8 @@ namespace Hangman_game
                 }
             else
                 {
-                return false;
                 this.NotInWordList.Add(letter);
+                return false;
                 }
             }
         }
