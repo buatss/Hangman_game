@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace Hangman_game
@@ -25,6 +26,14 @@ namespace Hangman_game
             }
             Console.WriteLine($"Filled dashes: {Current_Dashes}");
             return Current_Dashes;
+        }
+
+        public static string CharToUpperString(char charArgument)
+        {
+            string upperString;
+            upperString = charArgument.ToString();
+            upperString = upperString.ToUpper(new CultureInfo("en-US", false));
+            return upperString;
         }
     }
 }
