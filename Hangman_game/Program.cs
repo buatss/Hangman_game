@@ -2,7 +2,6 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
-using System.Globalization;
 
 namespace Hangman_game
 {
@@ -45,7 +44,7 @@ namespace Hangman_game
 
                 Hangman theGame = new Hangman();
                 theGame.SetAttributes(row[1], row[0]);
-                while(theGame.hp > 0 & theGame.win == null)
+                while(theGame.Hp > 0 & theGame.Win == null)
                 {
                     charInput = Console.ReadKey().KeyChar;
                     Console.WriteLine();
@@ -57,7 +56,7 @@ namespace Hangman_game
                             char letterInput = Console.ReadKey().KeyChar;
 
                             theGame.Check(letterInput.ToString());
-                            dashes = ProgramBase.FillDashes(letterInput, theGame.capital, dashes);
+                            dashes = ProgramBase.FillDashes(letterInput, theGame.Capital, dashes);
                             theGame.Check(dashes, false);
                             break;
                         case "W":
@@ -73,7 +72,7 @@ namespace Hangman_game
 
                 stopwatch.Stop();
                 DateTime localDate = DateTime.Now;
-                Console.WriteLine($"You tried to guess {theGame.tries} time(s) in {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.");
+                Console.WriteLine($"You tried to guess {theGame.Tries} time(s) in {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.");
                 Console.WriteLine("Do you wish to save your score? Press Y to do so or any other key to continue.");
                 charInput = Console.ReadKey().KeyChar;
                 switch(ProgramBase.CharToUpperString(charInput))
@@ -82,7 +81,7 @@ namespace Hangman_game
                         Console.WriteLine("Enter your nickname:");
                         string nickname = Console.ReadLine();
                         string splitter2 = " | ";
-                        string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds / 1000 + "." + stopwatch.ElapsedMilliseconds / 1000 + "s" + splitter2 + theGame.tries + splitter2 + theGame.capital;
+                        string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds / 1000 + "." + stopwatch.ElapsedMilliseconds / 1000 + "s" + splitter2 + theGame.Tries + splitter2 + theGame.Capital;
                         Console.WriteLine($"Score: {score}");
                         File.WriteAllText("..\\..\\..\\scores.txt", score);
                         break;
