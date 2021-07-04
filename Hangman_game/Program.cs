@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace Hangman_game
     {
@@ -34,9 +35,12 @@ namespace Hangman_game
             char RS;
             do
                 {
+                Stopwatch stopwatch = new Stopwatch();
                 Console.Clear();
-                Console.WriteLine("Welcome to Hangman game!");
-            string[] list = File.ReadAllLines(@"C:\Users\buats\OneDrive\Pulpit\Motorola Academy\countries_and_capitals.txt");
+                Console.WriteLine("Welcome to Hangman game!\nYou will have to guess a capital's name.\nPress any key to continue.");
+                Console.ReadKey();
+                stopwatch.Start();
+                string[] list = File.ReadAllLines(@"C:\Users\buats\OneDrive\Pulpit\Motorola Academy\countries_and_capitals.txt");
             int length = list.Length;
             Console.WriteLine($"List's length: {length}");
             String[] splitter = { " | " };
@@ -80,7 +84,8 @@ namespace Hangman_game
                             break;
                         }
                     }
-                Console.WriteLine("Do you want to try again? Press Y if you want so, if not press any key.");
+                stopwatch.Stop();
+                Console.WriteLine($"Elapsed time: {stopwatch.ElapsedMilliseconds/1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.\nDo you want to try again? Press Y if you want so, if not press any key.");
                 RS = Console.ReadKey().KeyChar;
                 } while (RS == 'Y' | RS == 'y');
             }

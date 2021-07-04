@@ -34,7 +34,7 @@ namespace Hangman_game
             {
             if (word.Equals(Capital))
                 {
-                Console.WriteLine($"Congratulations! {Capital} is capital of {Country}");
+                Console.WriteLine($"Congratulations! {Capital} is capital of {Country}.");
                 this.Win = true;
                 }
             else if (Capital.Contains(word))
