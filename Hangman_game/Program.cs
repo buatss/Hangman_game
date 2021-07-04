@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace Hangman_game
 {
@@ -46,13 +47,14 @@ namespace Hangman_game
                 theGame.SetAttributes(row[1], row[0]);
                 while(theGame.ReadHP() > 0 & theGame.Win == false)
                 {
-                    char selectInput = Console.ReadKey().KeyChar;
+                    char CharInput = Console.ReadKey().KeyChar;
+                    string selectInput = CharInput.ToString();
+                    selectInput = selectInput.ToUpper(new CultureInfo("en-US", false));
                     Console.WriteLine();
 
                     switch(selectInput)
                     {
-                        case 'l':
-                        case 'L':
+                        case "L":
                             Console.WriteLine($"You selected letter");
                             char letterInput = Console.ReadKey().KeyChar;
                             string letterInput2 = letterInput.ToString();
@@ -60,8 +62,7 @@ namespace Hangman_game
                             dashes = ProgramBase.FillDashes(letterInput, theGame.Capital, dashes);
                             theGame.Check(dashes, false);
                             break;
-                        case 'w':
-                        case 'W':
+                        case "W":
                             Console.WriteLine($"You selected word(s)");
                             string input = Console.ReadLine();
                             theGame.Check(input);
@@ -76,12 +77,16 @@ namespace Hangman_game
                 DateTime localDate = DateTime.Now;
                 Console.WriteLine($"You tried to guess {theGame.Tries} time(s) in {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.");
                 Console.WriteLine("Do you wish to save your score? Press Y to do so or any other key to continue.");
-                char saveInput = Console.ReadKey().KeyChar;
-
+                /* char CharInput = Console.ReadKey().KeyChar;
+                    string selectInput = CharInput.ToString();
+                    selectInput = selectInput.ToUpper(new CultureInfo("en-US", false));
+                    Console.WriteLine(); */
+                char saveCharInput = Console.ReadKey().KeyChar;
+                string saveInput = saveCharInput.ToString();
+                saveInput = saveInput.ToUpper(new CultureInfo("en-US", false));
                 switch(saveInput)
                 {
-                    case 'y':
-                    case 'Y':
+                    case "Y":
                         Console.WriteLine("Enter your nickname:");
                         string nickname = Console.ReadLine();
                         string splitter2 = " | ";
