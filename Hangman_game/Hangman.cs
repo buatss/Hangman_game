@@ -6,6 +6,7 @@ namespace Hangman_game
     public class Hangman
         {
         private int _hp = 5;
+        public int Tries { get; private set; } = 0;
         public bool Win { get; private set; }
         public List<string> NotInWordList = new List<string>();
         public string Capital { get; private set; }
@@ -30,7 +31,7 @@ namespace Hangman_game
             this.Country = country;
             }
 
-        public void Check(string word)
+        public void Check(string word, bool count_tries = true)
             {
             if (word.Equals(Capital))
                 {
@@ -54,6 +55,10 @@ namespace Hangman_game
                     {
                     this.SubstractHP(1);
                     }
+                }
+            if (count_tries == true)
+                {
+                this.Tries++;
                 }
             }
 

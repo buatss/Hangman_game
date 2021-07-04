@@ -79,7 +79,7 @@ namespace Hangman_game
                             string letterInput2 = letterInput.ToString();
                             theGame.Check(letterInput2);
                             dashes = FillDashes(letterInput, theGame.Capital, dashes);
-                            theGame.Check(dashes);
+                            theGame.Check(dashes, false) ;
                             break;
                         case 'w':
                         case 'W':
@@ -94,7 +94,7 @@ namespace Hangman_game
                     }
 
                 stopwatch.Stop();
-                Console.WriteLine($"Elapsed time: {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.\nDo you want to try again? Press Y if you want so, if not press any key.");
+                Console.WriteLine($"You tried to guess {theGame.Tries} time(s). Elapsed time: {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.\nDo you want to try again? Press Y if you want so, if not press any key.");
                 RS = Console.ReadKey().KeyChar;
                 } while (RS == 'Y' | RS == 'y');
             }
