@@ -94,7 +94,23 @@ namespace Hangman_game
                     }
 
                 stopwatch.Stop();
-                Console.WriteLine($"You tried to guess {theGame.Tries} time(s). Elapsed time: {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.\nDo you want to try again? Press Y if you want so, if not press any key.");
+                DateTime localDate = DateTime.Now;
+                Console.WriteLine($"You tried to guess {theGame.Tries} time(s) in {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.");
+                Console.WriteLine("Do you wish to save your score? Press Y to do so or any other key to continue.");
+               char saveInput = Console.ReadKey().KeyChar;
+
+                switch (saveInput)
+                    {
+                    case 'y':
+                    case 'Y':
+                        Console.WriteLine("Enter your nickname:");
+                        string nickname = Console.ReadLine();
+                        string splitter2 = " | ";
+                        string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds/1000 +"."+stopwatch.ElapsedMilliseconds/1000+"s"+ splitter2 + theGame.Tries + splitter2 + theGame.Capital;
+                        Console.WriteLine($"Score: {score}");
+                        break;
+                    }
+                Console.WriteLine("Press Y to try again or any other key to continue.");
                 RS = Console.ReadKey().KeyChar;
                 } while (RS == 'Y' | RS == 'y');
             }
