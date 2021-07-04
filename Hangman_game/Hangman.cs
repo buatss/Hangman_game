@@ -7,7 +7,7 @@ namespace Hangman_game
     {
         private int _hp = 5;
         public int Tries { get; private set; } = 0;
-        public bool Win { get; private set; }
+        public bool? Win { get; private set; }
         public List<string> NotInWordList = new List<string>();
         public string Capital { get; private set; }
         public string Country { get; private set; }

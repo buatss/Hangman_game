@@ -45,7 +45,7 @@ namespace Hangman_game
 
                 Hangman theGame = new Hangman();
                 theGame.SetAttributes(row[1], row[0]);
-                while(theGame.ReadHP() > 0 & theGame.Win == false)
+                while(theGame.ReadHP() > 0 & theGame.Win == null)
                 {
                     char CharInput = Console.ReadKey().KeyChar;
                     string selectInput = CharInput.ToString();
