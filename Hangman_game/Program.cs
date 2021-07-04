@@ -55,14 +55,14 @@ namespace Hangman_game
                             Console.WriteLine($"You selected letter");
                             char letterInput = Console.ReadKey().KeyChar;
 
-                            theGame.Check(letterInput.ToString());
+                            theGame.CheckLetter(letterInput.ToString());
                             dashes = ProgramBase.FillDashes(letterInput, theGame.Capital, dashes);
-                            theGame.Check(dashes, false);
+                            //theGame.CheckWord(dashes, false);
                             break;
                         case "W":
                             Console.WriteLine($"You selected word(s)");
                             string input = Console.ReadLine();
-                            theGame.Check(input);
+                            theGame.CheckWord(input);
                             break;
                         default:
                             Console.WriteLine("Wrong input, try again. Perhaps you pressed the wrong button or again you guessed wrong letter.");
