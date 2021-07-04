@@ -1,47 +1,26 @@
 ﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
 
 namespace Hangman_game
-    {
+{
     class Program
-        {
-        public static string FillDashes(char letter, string capital, string currentDashes)
-            {
-            var foundIndexes = new List<int>();
-            for (int i = 0; i < capital.Length; i++)
-                {
-                if (capital[i] == letter)
-                    {
-                    foundIndexes.Add(i);
-                    }
-                }
-            var aStringBuilder = new StringBuilder(currentDashes);
-            for (int i = 0; i < foundIndexes.Count; i++)
-                {
-                aStringBuilder.Remove(foundIndexes[i], 1);
-                aStringBuilder.Insert(foundIndexes[i], letter.ToString());
-                currentDashes = aStringBuilder.ToString();
-                }
-            Console.WriteLine($"Filled dashes: {currentDashes}");
-            return currentDashes;
-            }
+    {
+       
 
         static void Main(string[] args)
-            {
+        {
             char RS;
             do
-                {
+            {
                 Stopwatch stopwatch = new Stopwatch();
                 Console.Clear();
                 Console.WriteLine("Welcome to Hangman game!\nYou will have to guess a capital's name.\nPress any key to continue.");
                 Console.ReadKey();
                 stopwatch.Start();
 
-                string[] list = File.ReadAllLines(@"C:\Users\buats\OneDrive\Pulpit\Motorola Academy\countries_and_capitals.txt");
+                string[] list = File.ReadAllLines("..\\..\\..\\countries_and_capitals.txt");
                 int length = list.Length;
 
                 Console.WriteLine($"List's length: {length}");
@@ -65,21 +44,21 @@ namespace Hangman_game
 
                 Hangman theGame = new Hangman();
                 theGame.SetAttributes(row[1], row[0]);
-                while (theGame.ReadHP() > 0 & theGame.Win == false)
-                    {
+                while(theGame.ReadHP() > 0 & theGame.Win == false)
+                {
                     char selectInput = Console.ReadKey().KeyChar;
                     Console.WriteLine();
 
-                    switch (selectInput)
-                        {
+                    switch(selectInput)
+                    {
                         case 'l':
                         case 'L':
                             Console.WriteLine($"You selected letter");
                             char letterInput = Console.ReadKey().KeyChar;
                             string letterInput2 = letterInput.ToString();
                             theGame.Check(letterInput2);
-                            dashes = FillDashes(letterInput, theGame.Capital, dashes);
-                            theGame.Check(dashes, false) ;
+                            dashes = ProgramBase.FillDashes(letterInput, theGame.Capital, dashes);
+                            theGame.Check(dashes, false);
                             break;
                         case 'w':
                         case 'W':
@@ -90,29 +69,30 @@ namespace Hangman_game
                         default:
                             Console.WriteLine("Wrong input, try again. Perhaps you pressed the wrong button or again you guessed wrong letter.");
                             break;
-                        }
                     }
+                }
 
                 stopwatch.Stop();
                 DateTime localDate = DateTime.Now;
                 Console.WriteLine($"You tried to guess {theGame.Tries} time(s) in {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.");
                 Console.WriteLine("Do you wish to save your score? Press Y to do so or any other key to continue.");
-               char saveInput = Console.ReadKey().KeyChar;
+                char saveInput = Console.ReadKey().KeyChar;
 
-                switch (saveInput)
-                    {
+                switch(saveInput)
+                {
                     case 'y':
                     case 'Y':
                         Console.WriteLine("Enter your nickname:");
                         string nickname = Console.ReadLine();
                         string splitter2 = " | ";
-                        string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds/1000 +"."+stopwatch.ElapsedMilliseconds/1000+"s"+ splitter2 + theGame.Tries + splitter2 + theGame.Capital;
+                        string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds / 1000 + "." + stopwatch.ElapsedMilliseconds / 1000 + "s" + splitter2 + theGame.Tries + splitter2 + theGame.Capital;
                         Console.WriteLine($"Score: {score}");
+                        File.WriteAllText("..\\..\\..\\scores.txt", score);
                         break;
-                    }
+                }
                 Console.WriteLine("Press Y to try again or any other key to continue.");
                 RS = Console.ReadKey().KeyChar;
-                } while (RS == 'Y' | RS == 'y');
-            }
+            } while(RS == 'Y' | RS == 'y');
         }
     }
+}
