@@ -28,7 +28,7 @@ namespace Hangman_game
             return currentDashes;
         }
 
-        public static string ReadAsString()
+        public static string GetUserInput()
         {
             char Input = Console.ReadKey().KeyChar;
             Console.WriteLine();

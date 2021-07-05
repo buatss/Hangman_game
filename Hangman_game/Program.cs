@@ -5,10 +5,8 @@ using System.Diagnostics;
 
 namespace Hangman_game
 {
-    class Program
+    partial class Program
     {
-       
-
         static void Main(string[] args)
         {
 
@@ -16,7 +14,6 @@ namespace Hangman_game
             {
                 Stopwatch stopwatch = new Stopwatch();
                 Console.Clear();
-                Console.WriteLine("Welcome to Hangman game!\nYou will have to guess a capital's name.\nPress any key to continue.");
                 Console.ReadKey();
                 stopwatch.Start();
 
@@ -46,7 +43,7 @@ namespace Hangman_game
                     Console.WriteLine();
 
                     string caseOutput;
-                    switch(ProgramBase.ReadAsString())
+                    switch(ProgramBase.GetUserInput())
                     {
                         case "L":
                             Console.WriteLine($"Insert letter: ");
@@ -87,7 +84,7 @@ namespace Hangman_game
                 Console.WriteLine($"You tried to guess {theGame.Tries} time(s) in {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.");
                 Console.WriteLine("Do you wish to save your score? Press Y to do so or any other key to continue.");
                 Console.WriteLine();
-                switch(ProgramBase.ReadAsString())
+                switch(ProgramBase.GetUserInput())
                 {
                     case "Y":
                         Console.WriteLine("Enter your nickname:");
@@ -99,7 +96,7 @@ namespace Hangman_game
                         break;
                 }
                 Console.WriteLine("Press Y to try again or any other key to continue.");
-            } while(ProgramBase.ReadAsString().Contains("Y"));
+            } while(ProgramBase.GetUserInput().Contains("Y"));
         }
     }
 }
