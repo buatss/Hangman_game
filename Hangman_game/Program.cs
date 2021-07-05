@@ -11,7 +11,7 @@ namespace Hangman_game
 
         static void Main(string[] args)
         {
-            char resetChar, charInput;
+
             do
             {
                 Stopwatch stopwatch = new Stopwatch();
@@ -43,11 +43,10 @@ namespace Hangman_game
                 {
                     Console.WriteLine($"Guess a capital\n{dashes}");
                     Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
-                    charInput = Console.ReadKey().KeyChar;
                     Console.WriteLine();
 
                     string caseOutput;
-                    switch(ProgramBase.CharToUpperString(charInput))
+                    switch(ProgramBase.ReadCharThenToUpperString())
                     {
                         case "L":
                             Console.WriteLine($"Insert letter: ");
@@ -78,7 +77,7 @@ namespace Hangman_game
                     }
                     else if(theGame.HpCost>0)
                     {
-                        Console.WriteLine($"Wrong guess, this cost you {theGame.HpCost} life points");
+                        Console.WriteLine($"\nWrong guess, this cost you {theGame.HpCost} life points");
                         Console.WriteLine($"Not-in-word: {String.Join(", ", theGame.NotInWordList.ToArray())}");
                     }
                 }
@@ -87,9 +86,8 @@ namespace Hangman_game
                 DateTime localDate = DateTime.Now;
                 Console.WriteLine($"You tried to guess {theGame.Tries} time(s) in {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.");
                 Console.WriteLine("Do you wish to save your score? Press Y to do so or any other key to continue.");
-                charInput = Console.ReadKey().KeyChar;
                 Console.WriteLine();
-                switch(ProgramBase.CharToUpperString(charInput))
+                switch(ProgramBase.ReadCharThenToUpperString())
                 {
                     case "Y":
                         Console.WriteLine("Enter your nickname:");
@@ -98,12 +96,10 @@ namespace Hangman_game
                         string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds / 1000 + "." + stopwatch.ElapsedMilliseconds / 1000 + "s" + splitter2 + theGame.Tries + splitter2 + theGame.Capital;
                         Console.WriteLine($"Score: {score}");
                         File.AppendAllText("..\\..\\..\\scores.txt", "\n"+score);
-
                         break;
                 }
                 Console.WriteLine("Press Y to try again or any other key to continue.");
-                resetChar = Console.ReadKey().KeyChar;
-            } while(ProgramBase.CharToUpperString(resetChar) == "Y");
+            } while(ProgramBase.ReadCharThenToUpperString().Contains("Y"));
         }
     }
 }

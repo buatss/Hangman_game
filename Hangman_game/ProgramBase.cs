@@ -28,10 +28,12 @@ namespace Hangman_game
             return currentDashes;
         }
 
-        public static string CharToUpperString(char charArgument)
+        public static string ReadCharThenToUpperString()
         {
+            char Input = Console.ReadKey().KeyChar;
+            Console.WriteLine();
             string upperString;
-            upperString = charArgument.ToString();
+            upperString = Input.ToString();
             upperString = upperString.ToUpper(new CultureInfo("en-US", false));
             return upperString;
         }
