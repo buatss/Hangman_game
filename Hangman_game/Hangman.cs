@@ -9,7 +9,7 @@ namespace Hangman_game
         public int HpCost { get; private set; }
         public int Tries { get; private set; } = 0;
         public bool? Win { get; set; }
-        private List<string> _notInWordList = new List<string>();
+        public List<string> NotInWordList { get; private set; } = new List<string>();
         public string Capital { get; private set; }
         public string Country { get; private set; }
         public void ControlHp()
@@ -65,9 +65,9 @@ namespace Hangman_game
 
         private void CheckNotInWord(string letter)
         {
-            if(!_notInWordList.Contains(letter) & !Capital.Contains(letter))
+            if(!NotInWordList.Contains(letter) & !Capital.Contains(letter))
             {
-                _notInWordList.Add(letter);
+                NotInWordList.Add(letter);
                 Tries++;
                 HpCost = 1;
             }

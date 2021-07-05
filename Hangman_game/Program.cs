@@ -22,15 +22,13 @@ namespace Hangman_game
 
                 string[] list = File.ReadAllLines("..\\..\\..\\countries_and_capitals.txt");
                 int length = list.Length;
-
-                Console.WriteLine($"List's length: {length}");
-
                 String[] splitter = { " | " };
                 int splitterCount = 3;
                 Random random = new Random();
                 int rowNumber = random.Next(length);
                 string[] row = list[rowNumber].Split(splitter, splitterCount, StringSplitOptions.None);
 
+                Console.WriteLine($"List's length: {length}");
                 Console.WriteLine($"Row number: {rowNumber}");
                 Console.WriteLine($"Country: {row[0]}");
                 Console.WriteLine($"Capital: {row[1]}");
@@ -39,13 +37,12 @@ namespace Hangman_game
                 string dashes = row[1];
                 dashes = rgx.Replace(dashes, "_");
 
-                Console.WriteLine($"Guess a capital\n{dashes}");
-                Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
-
                 Hangman theGame = new Hangman();
                 theGame.SetAttributes(row[1], row[0]);
                 while(theGame.Hp > 0 & theGame.Win == null)
                 {
+                    Console.WriteLine($"Guess a capital\n{dashes}");
+                    Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
                     charInput = Console.ReadKey().KeyChar;
                     Console.WriteLine();
 
@@ -53,7 +50,7 @@ namespace Hangman_game
                     switch(ProgramBase.CharToUpperString(charInput))
                     {
                         case "L":
-                            Console.WriteLine($"You selected letter");
+                            Console.WriteLine($"Insert letter: ");
                             char letterInput = Console.ReadKey().KeyChar;
                             caseOutput = letterInput.ToString();
                             if(theGame.LetterValidator(caseOutput, dashes) == true)
@@ -62,7 +59,7 @@ namespace Hangman_game
                             }
                             break;
                         case "W":
-                            Console.WriteLine($"You selected word(s)");
+                            Console.WriteLine($"Insert word(s): ");
                             caseOutput = Console.ReadLine();
                             if (theGame.CheckWord(caseOutput)==true)
                             {
@@ -82,6 +79,7 @@ namespace Hangman_game
                     else if(theGame.HpCost>0)
                     {
                         Console.WriteLine($"Wrong guess, this cost you {theGame.HpCost} life points");
+                        Console.WriteLine($"Not-in-word: {String.Join(", ", theGame.NotInWordList.ToArray())}");
                     }
                 }
 
@@ -90,6 +88,7 @@ namespace Hangman_game
                 Console.WriteLine($"You tried to guess {theGame.Tries} time(s) in {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.");
                 Console.WriteLine("Do you wish to save your score? Press Y to do so or any other key to continue.");
                 charInput = Console.ReadKey().KeyChar;
+                Console.WriteLine();
                 switch(ProgramBase.CharToUpperString(charInput))
                 {
                     case "Y":
