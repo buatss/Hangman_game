@@ -87,6 +87,7 @@ namespace Hangman_game
                         string nickname = Console.ReadLine();
                         string splitter2 = " | ";
                         string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds / 1000 + "." + stopwatch.ElapsedMilliseconds / 10 + "s" + splitter2 + theGame.Tries + splitter2 + theGame.Capital;
+                        userMessages.WriteScore(score);
                         File.AppendAllText("..\\..\\..\\scores.txt", "\n" + score);
                         break;
                 }

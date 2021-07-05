@@ -55,7 +55,7 @@ namespace Hangman_game
 
         public void WriteScore(string score)
         {
-            Console.WriteLine($"Score: {score}");
+            Console.WriteLine($"Your score: {score}");
         }
 
         public void AskReset()
