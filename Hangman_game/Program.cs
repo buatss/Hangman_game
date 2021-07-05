@@ -71,7 +71,7 @@ namespace Hangman_game
                     {
                         userMessages.WriteWrongAnswer(theGame.HpCost, String.Join(", ", theGame.NotInWordList.ToArray()));
                     }
-                    else if(theGame.Hp<=0)
+                    if(theGame.Hp<=0)
                     {
                         userMessages.WriteDefeat(theGame.Capital,theGame.Country);
                     }
