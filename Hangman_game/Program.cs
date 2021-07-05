@@ -26,7 +26,7 @@ namespace Hangman_game
                 int rowNumber = random.Next(length);
                 string[] row = list[rowNumber].Split(splitter, splitterCount, StringSplitOptions.None);
 
-                userMessages.ShowDetails(length, rowNumber, row[1], row[0]); //this is for developer
+                //userMessages.ShowDetails(length, rowNumber, row[0], row[1]); //this is for developer
 
                 Regex rgx = new Regex("[^ ]");
                 string dashes = row[1];
@@ -70,6 +70,10 @@ namespace Hangman_game
                     else if(theGame.HpCost > 0)
                     {
                         userMessages.WriteWrongAnswer(theGame.HpCost, String.Join(", ", theGame.NotInWordList.ToArray()));
+                    }
+                    else if(theGame.Hp<=0)
+                    {
+                        userMessages.WriteDefeat(theGame.Capital,theGame.Country);
                     }
                 }
 

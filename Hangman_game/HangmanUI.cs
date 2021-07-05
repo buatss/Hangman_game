@@ -62,5 +62,9 @@ namespace Hangman_game
         {
             Console.WriteLine("Press Y to try again or any other key to continue.");
         }
+        public void WriteDefeat(string capital,string country)
+        {
+            Console.WriteLine($"Unfortunatly, you didn't make it. You keyword was {capital} - capital of {country}");
+        }
     }
 }

@@ -24,7 +24,6 @@ namespace Hangman_game
                 aStringBuilder.Insert(foundIndexes[i], letter.ToString());
                 currentDashes = aStringBuilder.ToString();
             }
-            //Console.WriteLine($"Filled dashes: {currentDashes}");
             return currentDashes;
         }
 
