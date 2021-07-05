@@ -9,14 +9,14 @@ namespace Hangman_game
     {
         static void Main(string[] args)
         {
-
+            HangmanUI userMessages = new HangmanUI();
             do
             {
                 Stopwatch stopwatch = new Stopwatch();
                 Console.Clear();
+                userMessages.WriteHeader();
                 Console.ReadKey();
                 stopwatch.Start();
-
                 string[] list = File.ReadAllLines("..\\..\\..\\countries_and_capitals.txt");
                 int length = list.Length;
                 String[] splitter = { " | " };
@@ -57,7 +57,7 @@ namespace Hangman_game
                         case "W":
                             Console.WriteLine($"Insert word(s): ");
                             caseOutput = Console.ReadLine();
-                            if (theGame.CheckWord(caseOutput)==true)
+                            if(theGame.CheckWord(caseOutput) == true)
                             {
                                 dashes = theGame.Capital;
                             }
@@ -72,7 +72,7 @@ namespace Hangman_game
                         theGame.Win = true;
                         Console.WriteLine($"Congratulations! {theGame.Capital} is capital of {theGame.Country}.");
                     }
-                    else if(theGame.HpCost>0)
+                    else if(theGame.HpCost > 0)
                     {
                         Console.WriteLine($"\nWrong guess, this cost you {theGame.HpCost} life points");
                         Console.WriteLine($"Not-in-word: {String.Join(", ", theGame.NotInWordList.ToArray())}");
@@ -92,7 +92,7 @@ namespace Hangman_game
                         string splitter2 = " | ";
                         string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds / 1000 + "." + stopwatch.ElapsedMilliseconds / 1000 + "s" + splitter2 + theGame.Tries + splitter2 + theGame.Capital;
                         Console.WriteLine($"Score: {score}");
-                        File.AppendAllText("..\\..\\..\\scores.txt", "\n"+score);
+                        File.AppendAllText("..\\..\\..\\scores.txt", "\n" + score);
                         break;
                 }
                 Console.WriteLine("Press Y to try again or any other key to continue.");

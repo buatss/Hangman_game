@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Hangman_game
 {
@@ -14,7 +13,7 @@ namespace Hangman_game
         public string Country { get; private set; }
         public void ControlHp()
         {
-            Hp-=HpCost;
+            Hp -= HpCost;
         }
         public bool LetterValidator(string letter, string currentDashes)
         {
@@ -29,7 +28,7 @@ namespace Hangman_game
                 CheckNotInWord(letter);
                 return false;
             }
- 
+
         }
         public void SetAttributes(string capital, string country)
         {
