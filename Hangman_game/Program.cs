@@ -56,7 +56,7 @@ namespace Hangman_game
                             Console.WriteLine($"You selected letter");
                             char letterInput = Console.ReadKey().KeyChar;
                             caseOutput = letterInput.ToString();
-                            if(theGame.Validator(caseOutput) == true)
+                            if(theGame.LetterValidator(caseOutput, dashes) == true)
                             {
                                 dashes = ProgramBase.FillDashes(letterInput, theGame.Capital, dashes);
                             }

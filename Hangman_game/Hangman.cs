@@ -9,16 +9,16 @@ namespace Hangman_game
         public int HpCost { get; private set; }
         public int Tries { get; private set; } = 0;
         public bool? Win { get; set; }
-        public List<string> _notInWordList = new List<string>();
+        private List<string> _notInWordList = new List<string>();
         public string Capital { get; private set; }
         public string Country { get; private set; }
         public void ControlHp()
         {
             Hp-=HpCost;
         }
-        public bool Validator(string letter)
+        public bool LetterValidator(string letter, string currentDashes)
         {
-            if(CheckLetter(letter)==true)
+            if(CheckLetter(letter) & !currentDashes.Contains(letter))
             {
                 Tries++;
                 HpCost = 0;
@@ -51,7 +51,7 @@ namespace Hangman_game
             }
         }
 
-        public bool CheckLetter(string letter)
+        private bool CheckLetter(string letter)
         {
             if(Capital.Contains(letter))
             {
@@ -63,19 +63,17 @@ namespace Hangman_game
             }
         }
 
-        public bool CheckNotInWord(string letter)
+        private void CheckNotInWord(string letter)
         {
-            if(_notInWordList.Contains(letter))
-            {
-                HpCost = 0;
-                return true;
-            }
-            else
+            if(!_notInWordList.Contains(letter) & !Capital.Contains(letter))
             {
                 _notInWordList.Add(letter);
                 Tries++;
                 HpCost = 1;
-                return false;
+            }
+            else
+            {
+                HpCost = 0;
             }
         }
     }
