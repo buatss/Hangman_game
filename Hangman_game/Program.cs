@@ -41,7 +41,7 @@ namespace Hangman_game
                     switch(ProgramBase.GetUserInput())
                     {
                         case "L":
-                            Console.WriteLine($"Insert letter: ");
+                            userMessages.WriteAskLetter();
                             char letterInput = Console.ReadKey().KeyChar;
                             caseOutput = letterInput.ToString();
                             if(theGame.LetterValidator(caseOutput, dashes))
@@ -50,7 +50,7 @@ namespace Hangman_game
                             }
                             break;
                         case "W":
-                            Console.WriteLine($"Insert word(s): ");
+                            userMessages.WriteAskWord();
                             caseOutput = Console.ReadLine();
                             if(theGame.CheckWord(caseOutput) == true)
                             {
@@ -58,7 +58,7 @@ namespace Hangman_game
                             }
                             break;
                         default:
-                            Console.WriteLine("Wrong input, try again. Perhaps you pressed the wrong button or again you guessed wrong letter.");
+                            userMessages.WriteWrongInput();
                             break;
                     }
                     theGame.ControlHp();
@@ -69,28 +69,24 @@ namespace Hangman_game
                     }
                     else if(theGame.HpCost > 0)
                     {
-                        Console.WriteLine($"\nWrong guess, this cost you {theGame.HpCost} life points");
-                        Console.WriteLine($"Not-in-word: {String.Join(", ", theGame.NotInWordList.ToArray())}");
+                        userMessages.WriteWrongAnswer(theGame.HpCost, String.Join(", ", theGame.NotInWordList.ToArray()));
                     }
                 }
 
                 stopwatch.Stop();
                 DateTime localDate = DateTime.Now;
-                Console.WriteLine($"You tried to guess {theGame.Tries} time(s) in {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.");
-                Console.WriteLine("Do you wish to save your score? Press Y to do so or any other key to continue.");
-                Console.WriteLine();
+                userMessages.WriteAfterLoop(theGame.Tries, stopwatch.ElapsedMilliseconds);
                 switch(ProgramBase.GetUserInput())
                 {
                     case "Y":
-                        Console.WriteLine("Enter your nickname:");
+                        userMessages.AskNickname();
                         string nickname = Console.ReadLine();
                         string splitter2 = " | ";
-                        string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds / 1000 + "." + stopwatch.ElapsedMilliseconds / 1000 + "s" + splitter2 + theGame.Tries + splitter2 + theGame.Capital;
-                        Console.WriteLine($"Score: {score}");
+                        string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds / 1000 + "." + stopwatch.ElapsedMilliseconds / 10 + "s" + splitter2 + theGame.Tries + splitter2 + theGame.Capital;
                         File.AppendAllText("..\\..\\..\\scores.txt", "\n" + score);
                         break;
                 }
-                Console.WriteLine("Press Y to try again or any other key to continue.");
+                userMessages.AskReset();
             } while(ProgramBase.GetUserInput().Contains("Y"));
         }
     }
