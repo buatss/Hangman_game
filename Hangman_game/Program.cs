@@ -46,7 +46,7 @@ namespace Hangman_game
                     Console.WriteLine();
 
                     string caseOutput;
-                    switch(ProgramBase.ReadCharThenToUpperString())
+                    switch(ProgramBase.ReadAsString())
                     {
                         case "L":
                             Console.WriteLine($"Insert letter: ");
@@ -87,7 +87,7 @@ namespace Hangman_game
                 Console.WriteLine($"You tried to guess {theGame.Tries} time(s) in {stopwatch.ElapsedMilliseconds / 1000}.{stopwatch.ElapsedMilliseconds / 1000}seconds.");
                 Console.WriteLine("Do you wish to save your score? Press Y to do so or any other key to continue.");
                 Console.WriteLine();
-                switch(ProgramBase.ReadCharThenToUpperString())
+                switch(ProgramBase.ReadAsString())
                 {
                     case "Y":
                         Console.WriteLine("Enter your nickname:");
@@ -99,7 +99,7 @@ namespace Hangman_game
                         break;
                 }
                 Console.WriteLine("Press Y to try again or any other key to continue.");
-            } while(ProgramBase.ReadCharThenToUpperString().Contains("Y"));
+            } while(ProgramBase.ReadAsString().Contains("Y"));
         }
     }
 }

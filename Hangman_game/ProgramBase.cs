@@ -28,7 +28,7 @@ namespace Hangman_game
             return currentDashes;
         }
 
-        public static string ReadCharThenToUpperString()
+        public static string ReadAsString()
         {
             char Input = Console.ReadKey().KeyChar;
             Console.WriteLine();
