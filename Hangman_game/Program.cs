@@ -97,7 +97,8 @@ namespace Hangman_game
                         string splitter2 = " | ";
                         string score = nickname + splitter2 + localDate + splitter2 + stopwatch.ElapsedMilliseconds / 1000 + "." + stopwatch.ElapsedMilliseconds / 1000 + "s" + splitter2 + theGame.Tries + splitter2 + theGame.Capital;
                         Console.WriteLine($"Score: {score}");
-                        File.WriteAllText("..\\..\\..\\scores.txt", score);
+                        File.AppendAllText("..\\..\\..\\scores.txt", "\n"+score);
+
                         break;
                 }
                 Console.WriteLine("Press Y to try again or any other key to continue.");
