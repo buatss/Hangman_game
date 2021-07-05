@@ -11,7 +11,7 @@ namespace Hangman_game
 
         static void Main(string[] args)
         {
-            char resetChar; char charInput;
+            char resetChar, charInput;
             do
             {
                 Stopwatch stopwatch = new Stopwatch();
@@ -56,7 +56,7 @@ namespace Hangman_game
                             Console.WriteLine($"You selected letter");
                             char letterInput = Console.ReadKey().KeyChar;
                             caseOutput = letterInput.ToString();
-                            if(theGame.CheckLetter(caseOutput) == true)
+                            if(theGame.Validator(caseOutput) == true)
                             {
                                 dashes = ProgramBase.FillDashes(letterInput, theGame.Capital, dashes);
                             }
@@ -73,14 +73,15 @@ namespace Hangman_game
                             Console.WriteLine("Wrong input, try again. Perhaps you pressed the wrong button or again you guessed wrong letter.");
                             break;
                     }
+                    theGame.ControlHp();
                     if(dashes.Contains(theGame.Capital))
                     {
                         theGame.Win = true;
                         Console.WriteLine($"Congratulations! {theGame.Capital} is capital of {theGame.Country}.");
                     }
-                    else if(theGame.hpCost>0)
+                    else if(theGame.HpCost>0)
                     {
-                        Console.WriteLine($"Wrong guess, this cost you {theGame.hpCost} life points");
+                        Console.WriteLine($"Wrong guess, this cost you {theGame.HpCost} life points");
                     }
                 }
 

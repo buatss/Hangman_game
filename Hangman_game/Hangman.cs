@@ -6,60 +6,75 @@ namespace Hangman_game
     public class Hangman
     {
         public int Hp { get; private set; } = 5;
-        public int hpCost { get; private set; }
+        public int HpCost { get; private set; }
         public int Tries { get; private set; } = 0;
         public bool? Win { get; set; }
         public List<string> _notInWordList = new List<string>();
         public string Capital { get; private set; }
         public string Country { get; private set; }
-
+        public void ControlHp()
+        {
+            Hp-=HpCost;
+        }
+        public bool Validator(string letter)
+        {
+            if(CheckLetter(letter)==true)
+            {
+                Tries++;
+                HpCost = 0;
+                return true;
+            }
+            else
+            {
+                CheckNotInWord(letter);
+                return false;
+            }
+ 
+        }
         public void SetAttributes(string capital, string country)
         {
             this.Capital = capital;
             this.Country = country;
         }
 
-        public bool CheckWord(string word, bool countTries = true)
+        public bool CheckWord(string word)
         {
             this.Tries++;
             if(word.Equals(Capital))
             {
-                this.hpCost = 0;
                 return true;
             }
             else
             {
-                hpCost = 2;
-                this.Hp -= this.hpCost;
+                HpCost = 2;
                 return false;
             }
         }
 
-        public bool CheckLetter(string word, bool countTries = true)
+        public bool CheckLetter(string letter)
         {
-            this.Tries++;
-            if(Capital.Contains(word))
+            if(Capital.Contains(letter))
             {
-                this.hpCost = 0;
                 return true;
             }
             else
             {
-                hpCost = 1;
-                this.Hp -= hpCost;
                 return false;
             }
         }
 
-        public bool CheckNotInWord(string letter) //if this method returns true player should have another try to guess without loosing HP
+        public bool CheckNotInWord(string letter)
         {
             if(_notInWordList.Contains(letter))
             {
+                HpCost = 0;
                 return true;
             }
             else
             {
                 _notInWordList.Add(letter);
+                Tries++;
+                HpCost = 1;
                 return false;
             }
         }
