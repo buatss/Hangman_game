@@ -49,24 +49,38 @@ namespace Hangman_game
                     charInput = Console.ReadKey().KeyChar;
                     Console.WriteLine();
 
+                    string caseOutput;
                     switch(ProgramBase.CharToUpperString(charInput))
                     {
                         case "L":
                             Console.WriteLine($"You selected letter");
                             char letterInput = Console.ReadKey().KeyChar;
-
-                            theGame.CheckLetter(letterInput.ToString());
-                            dashes = ProgramBase.FillDashes(letterInput, theGame.Capital, dashes);
-                            //theGame.CheckWord(dashes, false);
+                            caseOutput = letterInput.ToString();
+                            if(theGame.CheckLetter(caseOutput) == true)
+                            {
+                                dashes = ProgramBase.FillDashes(letterInput, theGame.Capital, dashes);
+                            }
                             break;
                         case "W":
                             Console.WriteLine($"You selected word(s)");
-                            string input = Console.ReadLine();
-                            theGame.CheckWord(input);
+                            caseOutput = Console.ReadLine();
+                            if (theGame.CheckWord(caseOutput)==true)
+                            {
+                                dashes = theGame.Capital;
+                            }
                             break;
                         default:
                             Console.WriteLine("Wrong input, try again. Perhaps you pressed the wrong button or again you guessed wrong letter.");
                             break;
+                    }
+                    if(dashes.Contains(theGame.Capital))
+                    {
+                        theGame.Win = true;
+                        Console.WriteLine($"Congratulations! {theGame.Capital} is capital of {theGame.Country}.");
+                    }
+                    if(theGame.hpCost>0)
+                    {
+                        Console.WriteLine($"Wrong guess, this cost you {theGame.hpCost} life points");
                     }
                 }
 

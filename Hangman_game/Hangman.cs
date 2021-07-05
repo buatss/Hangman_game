@@ -6,8 +6,9 @@ namespace Hangman_game
     public class Hangman
     {
         public int Hp { get; private set; } = 5;
+        public int hpCost { get; private set; }
         public int Tries { get; private set; } = 0;
-        public bool? Win { get; private set; }
+        public bool? Win { get; set; }
         public List<string> _notInWordList = new List<string>();
         public string Capital { get; private set; }
         public string Country { get; private set; }
@@ -18,31 +19,36 @@ namespace Hangman_game
             this.Country = country;
         }
 
-        public void CheckWord(string word, bool countTries = true)
+        public bool CheckWord(string word, bool countTries = true)
         {
+            this.Tries++;
             if(word.Equals(Capital))
             {
-                Console.WriteLine($"Congratulations! {Capital} is capital of {Country}.");
-                this.Win = true;
+                this.hpCost = 0;
+                return true;
             }
             else
             {
-                this.Hp = this.Hp - 2;
+                hpCost = 2;
+                this.Hp -= this.hpCost;
+                return false;
             }
-                this.Tries++;
         }
 
-        public void CheckLetter(string word, bool countTries = true)
+        public bool CheckLetter(string word, bool countTries = true)
         {
+            this.Tries++;
             if(Capital.Contains(word))
             {
-                Console.WriteLine($"This word contains this letter.");
+                this.hpCost = 0;
+                return true;
             }
             else
             {
-                this.Hp--;
+                hpCost = 1;
+                this.Hp -= hpCost;
+                return false;
             }
-            this.Tries++;
         }
 
         public bool CheckNotInWord(string letter) //if this method returns true player should have another try to guess without loosing HP
