@@ -12,6 +12,7 @@ namespace Hangman_game
             HangmanUI userMessages = new HangmanUI();
             do
             {
+                Hangman theGame = new Hangman();
                 Stopwatch stopwatch = new Stopwatch();
                 Console.Clear();
                 userMessages.WriteHeader();
@@ -25,22 +26,16 @@ namespace Hangman_game
                 int rowNumber = random.Next(length);
                 string[] row = list[rowNumber].Split(splitter, splitterCount, StringSplitOptions.None);
 
-                Console.WriteLine($"List's length: {length}");
-                Console.WriteLine($"Row number: {rowNumber}");
-                Console.WriteLine($"Country: {row[0]}");
-                Console.WriteLine($"Capital: {row[1]}");
+                userMessages.ShowDetails(length, rowNumber, row[1], row[0]); //this is for developer
 
                 Regex rgx = new Regex("[^ ]");
                 string dashes = row[1];
                 dashes = rgx.Replace(dashes, "_");
 
-                Hangman theGame = new Hangman();
                 theGame.SetAttributes(row[1], row[0]);
                 while(theGame.Hp > 0 & theGame.Win == null)
                 {
-                    Console.WriteLine($"Guess a capital\n{dashes}");
-                    Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
-                    Console.WriteLine();
+                    userMessages.WriteLoopHeader(dashes);
 
                     string caseOutput;
                     switch(ProgramBase.GetUserInput())
@@ -49,7 +44,7 @@ namespace Hangman_game
                             Console.WriteLine($"Insert letter: ");
                             char letterInput = Console.ReadKey().KeyChar;
                             caseOutput = letterInput.ToString();
-                            if(theGame.LetterValidator(caseOutput, dashes) == true)
+                            if(theGame.LetterValidator(caseOutput, dashes))
                             {
                                 dashes = ProgramBase.FillDashes(letterInput, theGame.Capital, dashes);
                             }
