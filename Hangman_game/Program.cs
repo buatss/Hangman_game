@@ -78,7 +78,7 @@ namespace Hangman_game
                         theGame.Win = true;
                         Console.WriteLine($"Congratulations! {theGame.Capital} is capital of {theGame.Country}.");
                     }
-                    if(theGame.hpCost>0)
+                    else if(theGame.hpCost>0)
                     {
                         Console.WriteLine($"Wrong guess, this cost you {theGame.hpCost} life points");
                     }
