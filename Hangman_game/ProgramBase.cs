@@ -7,23 +7,29 @@ namespace Hangman_game
 {
     internal class ProgramBase
     {
-        public static string FillDashes(char letter, string capital, string currentDashes)
+        public static string FillDashes(string letter, string capital, string currentDashes)
         {
-            var foundIndexes = new List<int>();
-            for(int i = 0; i < capital.Length; i++)
+            int j = 0;
+            do
             {
-                if(capital[i] == letter)
+                var foundIndexes = new List<int>();
+                for(int i = 0; i < capital.Length; i++)
                 {
-                    foundIndexes.Add(i);
+                    if(capital[i] == letter[0])
+                    {
+                        foundIndexes.Add(i);
+                    }
                 }
-            }
-            var aStringBuilder = new StringBuilder(currentDashes);
-            for(int i = 0; i < foundIndexes.Count; i++)
-            {
-                aStringBuilder.Remove(foundIndexes[i], 1);
-                aStringBuilder.Insert(foundIndexes[i], letter.ToString());
-                currentDashes = aStringBuilder.ToString();
-            }
+                var aStringBuilder = new StringBuilder(currentDashes);
+                for(int i = 0; i < foundIndexes.Count; i++)
+                {
+                    aStringBuilder.Remove(foundIndexes[i], 1);
+                    aStringBuilder.Insert(foundIndexes[i], letter.ToString());
+                    currentDashes = aStringBuilder.ToString();
+                }
+                letter = letter.ToLower();
+                j++;
+            } while(j < 2);
             return currentDashes;
         }
 

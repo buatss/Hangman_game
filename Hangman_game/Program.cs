@@ -26,7 +26,7 @@ namespace Hangman_game
                 int rowNumber = random.Next(length);
                 string[] row = list[rowNumber].Split(splitter, splitterCount, StringSplitOptions.None);
 
-                //userMessages.ShowDetails(length, rowNumber, row[0], row[1]); //this is for developer
+                userMessages.ShowDetails(length, rowNumber, row[0], row[1]); //this is for developer
 
                 Regex rgx = new Regex("[^ ]");
                 string dashes = row[1];
@@ -36,23 +36,21 @@ namespace Hangman_game
                 while(theGame.Hp > 0 & theGame.Win == null)
                 {
                     userMessages.WriteLoopHeader(dashes);
-
-                    string caseOutput;
                     switch(ProgramBase.GetUserInput())
                     {
                         case "L":
                             userMessages.WriteAskLetter();
-                            char letterInput = Console.ReadKey().KeyChar;
-                            caseOutput = letterInput.ToString();
-                            if(theGame.LetterValidator(caseOutput, dashes))
+                            //char letterInput = Console.ReadKey().KeyChar;
+                            //caseOutput = letterInput.ToString();
+                            string userInput = ProgramBase.GetUserInput();
+                            if(theGame.LetterValidator(userInput, dashes))
                             {
-                                dashes = ProgramBase.FillDashes(letterInput, theGame.Capital, dashes);
+                                dashes = ProgramBase.FillDashes(userInput, theGame.Capital, dashes);
                             }
                             break;
                         case "W":
                             userMessages.WriteAskWord();
-                            caseOutput = Console.ReadLine();
-                            if(theGame.CheckWord(caseOutput) == true)
+                            if(theGame.CheckWord(Console.ReadLine().ToUpper()) == true)
                             {
                                 dashes = theGame.Capital;
                             }

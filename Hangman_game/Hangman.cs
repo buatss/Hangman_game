@@ -39,7 +39,7 @@ namespace Hangman_game
         public bool CheckWord(string word)
         {
             this.Tries++;
-            if(word.Equals(Capital))
+            if(word.Equals(Capital.ToUpper()))
             {
                 return true;
             }
@@ -52,7 +52,7 @@ namespace Hangman_game
 
         private bool CheckLetter(string letter)
         {
-            if(Capital.Contains(letter))
+            if(Capital.Contains(letter) | Capital.Contains(letter.ToLower()))
             {
                 return true;
             }
