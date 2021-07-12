@@ -9,6 +9,7 @@ namespace Hangman_game
     {
         static void Main(string[] args)
         {
+            int length = File.ReadAllLines("..\\..\\..\\countries_and_capitals.txt").Length;
             HangmanUI userMessages = new HangmanUI();
             do
             {
@@ -18,15 +19,8 @@ namespace Hangman_game
                 userMessages.WriteHeader();
                 Console.ReadKey();
                 stopwatch.Start();
-                string[] list = File.ReadAllLines("..\\..\\..\\countries_and_capitals.txt");
-                int length = list.Length;
-                String[] splitter = { " | " };
-                int splitterCount = 3;
-                Random random = new Random();
-                int rowNumber = random.Next(length);
-                string[] row = list[rowNumber].Split(splitter, splitterCount, StringSplitOptions.None);
-
-                userMessages.ShowDetails(length, rowNumber, row[0], row[1]); //this is for developer
+                string[] row = ProgramBase.GetRandomRow(length);
+                userMessages.ShowDetails(length, 0, row[0], row[1]); //this is for developer
 
                 Regex rgx = new Regex("[^ ]");
                 string dashes = row[1];

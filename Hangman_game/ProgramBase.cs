@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Hangman_game
@@ -41,6 +43,19 @@ namespace Hangman_game
             upperString = Input.ToString();
             upperString = upperString.ToUpper(new CultureInfo("en-US", false));
             return upperString;
+        }
+
+        public static string[] GetRandomRow(int length)
+        {
+            //string[] list = File.ReadAllLines("..\\..\\..\\countries_and_capitals.txt");
+            //int length = File.ReadAllLines("..\\..\\..\\countries_and_capitals.txt").Length;
+            String[] splitter = { " | " };
+            int splitterCount = splitter[0].Length;
+            Random random = new Random();
+            int rowNumber = random.Next(length);
+            string line = File.ReadLines("..\\..\\..\\countries_and_capitals.txt").Skip(length-1).Take(1).First();
+            string[] row = line.Split(splitter, splitterCount, StringSplitOptions.None);
+            return row;
         }
     }
 }
