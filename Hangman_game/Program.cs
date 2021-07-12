@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Diagnostics;
 
 namespace Hangman_game
@@ -20,7 +19,7 @@ namespace Hangman_game
                 userMessages.WriteHeader();
                 Console.ReadKey();
                 stopwatch.Start();
-                userMessages.ShowDetails(length, 0, theGame.Country, theGame.Capital); //this is for developer
+                //userMessages.ShowDetails(length, 0, theGame.Country, theGame.Capital); //this is for developer
                 string dashes = ProgramBase.ReplaceAsDashes(theGame.Capital);
                 while(theGame.Hp > 0 & theGame.Win == null)
                 {
@@ -29,8 +28,6 @@ namespace Hangman_game
                     {
                         case "L":
                             userMessages.WriteAskLetter();
-                            //char letterInput = Console.ReadKey().KeyChar;
-                            //caseOutput = letterInput.ToString();
                             string userInput = ProgramBase.GetUserInput();
                             if(theGame.LetterValidator(userInput, dashes))
                             {
@@ -58,9 +55,9 @@ namespace Hangman_game
                     {
                         userMessages.WriteWrongAnswer(theGame.HpCost, String.Join(", ", theGame.NotInWordList.ToArray()));
                     }
-                    if(theGame.Hp<=0)
+                    if(theGame.Hp <= 0)
                     {
-                        userMessages.WriteDefeat(theGame.Capital,theGame.Country);
+                        userMessages.WriteDefeat(theGame.Capital, theGame.Country);
                     }
                 }
 

@@ -31,7 +31,7 @@ namespace Hangman_game
             }
 
         }
-        public void SetAttributes(Tuple<string, string>row)
+        public void SetAttributes(Tuple<string, string> row)
         {
             this.Capital = row.Item1;
             this.Country = row.Item2;

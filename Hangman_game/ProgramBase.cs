@@ -46,15 +46,13 @@ namespace Hangman_game
             return upperString;
         }
 
-        public static Tuple<string,string> GetRandomRow(int length)
+        public static Tuple<string, string> GetRandomRow(int length)
         {
-            //string[] list = File.ReadAllLines("..\\..\\..\\countries_and_capitals.txt");
-            //int length = File.ReadAllLines("..\\..\\..\\countries_and_capitals.txt").Length;
             String[] splitter = { " | " };
             int splitterCount = splitter[0].Length;
             Random random = new Random();
             int rowNumber = random.Next(length);
-            string line = File.ReadLines("..\\..\\..\\countries_and_capitals.txt").Skip(rowNumber-1).Take(1).First();
+            string line = File.ReadLines("..\\..\\..\\countries_and_capitals.txt").Skip(rowNumber - 1).Take(1).First();
             string[] row = line.Split(splitter, splitterCount, StringSplitOptions.None);
             return Tuple.Create(row[1], row[0]);
         }
