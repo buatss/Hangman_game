@@ -39,7 +39,7 @@ namespace Hangman_game
         public bool CheckWord(string word)
         {
             this.Tries++;
-            if(word.Equals(Capital.ToUpper()))
+            if(word.ToUpper().Equals(Capital.ToUpper()))
             {
                 return true;
             }

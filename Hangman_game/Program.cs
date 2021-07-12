@@ -50,7 +50,7 @@ namespace Hangman_game
                             break;
                         case "W":
                             userMessages.WriteAskWord();
-                            if(theGame.CheckWord(Console.ReadLine().ToUpper()) == true)
+                            if(theGame.CheckWord(Console.ReadLine()) == true)
                             {
                                 dashes = theGame.Capital;
                             }
