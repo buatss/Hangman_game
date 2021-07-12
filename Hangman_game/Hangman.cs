@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Hangman_game
 {
@@ -30,10 +31,10 @@ namespace Hangman_game
             }
 
         }
-        public void SetAttributes(string capital, string country)
+        public void SetAttributes(Tuple<string, string>row)
         {
-            this.Capital = capital;
-            this.Country = country;
+            this.Capital = row.Item1;
+            this.Country = row.Item2;
         }
 
         public bool CheckWord(string word)

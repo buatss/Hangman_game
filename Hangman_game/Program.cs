@@ -14,19 +14,16 @@ namespace Hangman_game
             do
             {
                 Hangman theGame = new Hangman();
+                theGame.SetAttributes(ProgramBase.GetRandomRow(length));
                 Stopwatch stopwatch = new Stopwatch();
                 Console.Clear();
                 userMessages.WriteHeader();
                 Console.ReadKey();
                 stopwatch.Start();
-                string[] row = ProgramBase.GetRandomRow(length);
-                userMessages.ShowDetails(length, 0, row[0], row[1]); //this is for developer
-
+                userMessages.ShowDetails(length, 0, theGame.Country, theGame.Capital); //this is for developer
                 Regex rgx = new Regex("[^ ]");
-                string dashes = row[1];
+                string dashes = theGame.Capital;
                 dashes = rgx.Replace(dashes, "_");
-
-                theGame.SetAttributes(row[1], row[0]);
                 while(theGame.Hp > 0 & theGame.Win == null)
                 {
                     userMessages.WriteLoopHeader(dashes);
