@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Hangman_game
 {
@@ -56,6 +57,13 @@ namespace Hangman_game
             string line = File.ReadLines("..\\..\\..\\countries_and_capitals.txt").Skip(rowNumber-1).Take(1).First();
             string[] row = line.Split(splitter, splitterCount, StringSplitOptions.None);
             return Tuple.Create(row[1], row[0]);
+        }
+        public static string ReplaceAsDashes(string capital)
+        {
+            Regex rgx = new Regex("[^ ]");
+            string dashes = capital;
+            dashes = rgx.Replace(dashes, "_");
+            return dashes;
         }
     }
 }

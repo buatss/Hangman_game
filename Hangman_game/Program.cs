@@ -21,9 +21,7 @@ namespace Hangman_game
                 Console.ReadKey();
                 stopwatch.Start();
                 userMessages.ShowDetails(length, 0, theGame.Country, theGame.Capital); //this is for developer
-                Regex rgx = new Regex("[^ ]");
-                string dashes = theGame.Capital;
-                dashes = rgx.Replace(dashes, "_");
+                string dashes = ProgramBase.ReplaceAsDashes(theGame.Capital);
                 while(theGame.Hp > 0 & theGame.Win == null)
                 {
                     userMessages.WriteLoopHeader(dashes);
