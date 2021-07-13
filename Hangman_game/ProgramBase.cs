@@ -69,7 +69,6 @@ namespace Hangman_game
             int currentLineCursor = Console.CursorTop;
             Console.SetCursorPosition(0, Console.CursorTop - above);
             Console.Write(new string(' ', Console.WindowWidth));
-            //Console.SetCursorPosition(0, currentLineCursor);
         }
     }
 }

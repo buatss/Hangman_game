@@ -23,7 +23,7 @@ namespace Hangman_game
             Console.WriteLine($"Country: {country}");
             Console.WriteLine($"Capital: {key}");
         }
-        public void WriteLoopHeader(string dashes, int hp)
+        void WriteLoopHeader(string dashes, int hp)
         {
             Console.WriteLine($"Guess a capital\nYour keyword: {dashes}    Left HP: {hp}");
             Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
@@ -41,12 +41,7 @@ namespace Hangman_game
             Console.WriteLine("Wrong input, try again. Perhaps you pressed the wrong button or again you guessed wrong letter.");
         }
 
-        public void WriteWrongAnswer(int hpCost)
-        {
-            Console.WriteLine($"\nWrong guess, this cost you {hpCost} life points");
-        }
-
-        public void WriteNotInWord(string notInWordList)
+        void WriteNotInWord(string notInWordList)
         {
             Console.WriteLine($"Not-in-word: {String.Join(", ", notInWordList)}");
         }
