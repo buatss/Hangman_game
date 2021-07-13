@@ -17,9 +17,7 @@ namespace Hangman_game
                 Stopwatch stopwatch = new Stopwatch();
                 string dashes = ProgramBase.ReplaceAsDashes(theGame.Capital);
                 Console.Clear();
-                userMessages.WriteHeader();
-                userMessages.WriteNotInWord(String.Join(", ", theGame.NotInWordList.ToArray()));
-                userMessages.WriteLoopHeader(dashes, theGame.Hp);
+                userMessages.WriteHeader(theGame.NotInWordList,dashes,theGame.Hp);
                 userMessages.AskStart();
                 Console.ReadKey();
                 stopwatch.Start();
@@ -28,9 +26,7 @@ namespace Hangman_game
                 {
                     theGame.ControlHp();
                     Console.Clear();
-                    userMessages.WriteHeader();
-                    userMessages.WriteNotInWord(String.Join(", ", theGame.NotInWordList.ToArray()));
-                    userMessages.WriteLoopHeader(dashes, theGame.Hp);
+                    userMessages.WriteHeader(theGame.NotInWordList, dashes, theGame.Hp);
                     string caseInput = ProgramBase.GetUserInput();
                     ProgramBase.ClearCurrentConsoleLine(1);
                     //userMessages.ShowDetails(length, 0, theGame.Country, theGame.Capital); //this is for developer

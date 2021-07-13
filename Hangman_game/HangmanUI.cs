@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Hangman_game
 {
     public class HangmanUI
     {
-        public void WriteHeader()
+        public void WriteHeader(List<string> notInWordList, string dashes, int hp)
+        {
+            WriteSubheader();
+            WriteNotInWord(String.Join(", ", notInWordList.ToArray()));
+            WriteLoopHeader(dashes, hp);
+        }
+
+        public void WriteSubheader()
         {
             Console.WriteLine("Welcome to Hangman game!\nYou will have to guess a capital's name.");
         }
@@ -17,9 +25,8 @@ namespace Hangman_game
         }
         public void WriteLoopHeader(string dashes, int hp)
         {
-            Console.WriteLine($"\nGuess a capital\nYour keyword: {dashes}    Left HP: {hp}");
+            Console.WriteLine($"Guess a capital\nYour keyword: {dashes}    Left HP: {hp}");
             Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
-            Console.WriteLine();
         }
         public void WriteAskLetter()
         {
