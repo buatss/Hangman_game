@@ -21,7 +21,6 @@ namespace Hangman_game
                 userMessages.AskStart();
                 Console.ReadKey();
                 stopwatch.Start();
-                userMessages.ShowDetails(length, 0, theGame.Country, theGame.Capital); //this is for developer
                 while(theGame.Hp > 0 & theGame.Win == null)
                 {
                     theGame.ControlHp();
