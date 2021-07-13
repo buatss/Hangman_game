@@ -15,6 +15,11 @@ namespace Hangman_game
         public void ControlHp()
         {
             Hp -= HpCost;
+            HpCost = 0;
+            if(Hp < 0)
+            {
+                Hp = 0;
+            }
         }
         public bool LetterValidator(string letter, string currentDashes)
         {

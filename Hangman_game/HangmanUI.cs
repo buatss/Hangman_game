@@ -6,7 +6,7 @@ namespace Hangman_game
     {
         public void WriteHeader()
         {
-            Console.WriteLine("Welcome to Hangman game!\nYou will have to guess a capital's name.\nPress any key to continue.");
+            Console.WriteLine("Welcome to Hangman game!\nYou will have to guess a capital's name.");
         }
         public void ShowDetails(int length, int rowNumber, string country, string key)
         {
@@ -15,9 +15,9 @@ namespace Hangman_game
             Console.WriteLine($"Country: {country}");
             Console.WriteLine($"Capital: {key}");
         }
-        public void WriteLoopHeader(string dashes)
+        public void WriteLoopHeader(string dashes, int hp)
         {
-            Console.WriteLine($"Guess a capital\n{dashes}");
+            Console.WriteLine($"\nGuess a capital\nYour keyword: {dashes}    Left HP: {hp}");
             Console.WriteLine($"Do you wish to guess letter or word? Press 'L' for letter or 'W' for word(s).");
             Console.WriteLine();
         }
@@ -34,12 +34,15 @@ namespace Hangman_game
             Console.WriteLine("Wrong input, try again. Perhaps you pressed the wrong button or again you guessed wrong letter.");
         }
 
-        public void WriteWrongAnswer(int hpCost, string NotInWordList)
+        public void WriteWrongAnswer(int hpCost)
         {
             Console.WriteLine($"\nWrong guess, this cost you {hpCost} life points");
-            Console.WriteLine($"Not-in-word: {String.Join(", ", NotInWordList)}");
         }
 
+        public void WriteNotInWord(string notInWordList)
+        {
+            Console.WriteLine($"Not-in-word: {String.Join(", ", notInWordList)}");
+        }
         public void WriteAfterLoop(int tries, long time)
         {
             Console.WriteLine($"You tried to guess {tries} time(s) in {time / 1000}.{time / 10}seconds.");
@@ -60,6 +63,11 @@ namespace Hangman_game
         public void AskReset()
         {
             Console.WriteLine("Press Y to try again or any other key to continue.");
+        }
+
+        public void AskStart()
+        {
+            Console.WriteLine("Press any key to start.");
         }
         public void WriteDefeat(string capital, string country)
         {

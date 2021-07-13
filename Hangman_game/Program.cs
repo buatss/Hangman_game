@@ -15,16 +15,26 @@ namespace Hangman_game
                 Hangman theGame = new Hangman();
                 theGame.SetAttributes(ProgramBase.GetRandomRow(length));
                 Stopwatch stopwatch = new Stopwatch();
+                string dashes = ProgramBase.ReplaceAsDashes(theGame.Capital);
                 Console.Clear();
                 userMessages.WriteHeader();
+                userMessages.WriteNotInWord(String.Join(", ", theGame.NotInWordList.ToArray()));
+                userMessages.WriteLoopHeader(dashes, theGame.Hp);
+                userMessages.AskStart();
                 Console.ReadKey();
                 stopwatch.Start();
-                //userMessages.ShowDetails(length, 0, theGame.Country, theGame.Capital); //this is for developer
-                string dashes = ProgramBase.ReplaceAsDashes(theGame.Capital);
+                userMessages.ShowDetails(length, 0, theGame.Country, theGame.Capital); //this is for developer
                 while(theGame.Hp > 0 & theGame.Win == null)
                 {
-                    userMessages.WriteLoopHeader(dashes);
-                    switch(ProgramBase.GetUserInput())
+                    theGame.ControlHp();
+                    Console.Clear();
+                    userMessages.WriteHeader();
+                    userMessages.WriteNotInWord(String.Join(", ", theGame.NotInWordList.ToArray()));
+                    userMessages.WriteLoopHeader(dashes, theGame.Hp);
+                    string caseInput = ProgramBase.GetUserInput();
+                    ProgramBase.ClearCurrentConsoleLine(1);
+                    //userMessages.ShowDetails(length, 0, theGame.Country, theGame.Capital); //this is for developer
+                    switch(caseInput)
                     {
                         case "L":
                             userMessages.WriteAskLetter();
@@ -51,16 +61,11 @@ namespace Hangman_game
                         theGame.Win = true;
                         Console.WriteLine($"Congratulations! {theGame.Capital} is capital of {theGame.Country}.");
                     }
-                    else if(theGame.HpCost > 0)
-                    {
-                        userMessages.WriteWrongAnswer(theGame.HpCost, String.Join(", ", theGame.NotInWordList.ToArray()));
-                    }
-                    if(theGame.Hp <= 0)
+                    else if(theGame.Hp <= 0)
                     {
                         userMessages.WriteDefeat(theGame.Capital, theGame.Country);
                     }
                 }
-
                 stopwatch.Stop();
                 DateTime localDate = DateTime.Now;
                 userMessages.WriteAfterLoop(theGame.Tries, stopwatch.ElapsedMilliseconds);

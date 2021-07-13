@@ -63,5 +63,13 @@ namespace Hangman_game
             dashes = rgx.Replace(dashes, "_");
             return dashes;
         }
+
+        public static void ClearCurrentConsoleLine(int above)
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop - above);
+            Console.Write(new string(' ', Console.WindowWidth));
+            //Console.SetCursorPosition(0, currentLineCursor);
+        }
     }
 }
